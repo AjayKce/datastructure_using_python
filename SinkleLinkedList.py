@@ -121,13 +121,39 @@ class SingleLinkedList:
             p.link = temp
     
     def delete_node(self,x):
-        pass
+        if self.start is None:
+            print("empty list")
+            return
+        if self.start.info==x:
+            self.start=self.start.link
+            return
+        p=self.start
+        while p.link is not None:
+            if p.link.info==x:
+                break
+            p=p.link
+        if p.link is None:
+            print(x," Not in list")
+        else:
+            p.link = p.link.link
     
     def delete_first_node(self):
-        pass
+        if self.start is None:
+            print("empty list")
+            return
+        self.start = self.start.link
     
     def delete_last_node(self):
-        pass
+        if self.start is None:
+            print("empty list")
+            return
+        if self.start.link is None:
+            self.start=None
+            return
+        p = self.start
+        while p.link.link is not None:
+            p= p.link
+        p.link=None
     
     def bubble_sort_exdata(self):
         pass
@@ -173,6 +199,8 @@ while True:
     print("7.Insert Node before specified")
     print("8.Insert Node at given position")
     print("9.delete first node")
+    print("10.delete last node")
+    print("11.delete node")
     option = int(input('enter your option :'))
     if option == 1:
         li.display_list()
@@ -196,5 +224,12 @@ while True:
     elif option == 8:
         ele,k = list(map(int,input('enter the ele to insert and position :').split()))
         li.insert_at_position(ele,k)
+    elif option == 9:
+        li.delete_first_node()
+    elif option == 10:
+        li.delete_last_node()
+    elif option == 11:
+        ele = int(input('enter the ele to delete :'))
+        li.delete_node(ele)
     else:
         break
